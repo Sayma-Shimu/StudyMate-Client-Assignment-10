@@ -12,6 +12,7 @@ import Register from "../pages/Register";
 import Forget from "../pages/Forget";
 import ErrorPage from "../pages/ErrorPage";
 import CardDetails from "../components/CardDetails";
+import FindPartners from "../pages/FindPartners";
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />,
                 loader: () => fetch("/services.json"),
+            },
+            {
+                path: '/find-partners',
+                element: <FindPartners/>,
+                loader:() => fetch('http://localhost:3000/partners')
             },
 
             {

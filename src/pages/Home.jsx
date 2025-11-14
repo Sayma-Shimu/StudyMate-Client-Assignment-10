@@ -13,7 +13,7 @@ const Home = () => {
     
 
     useEffect(() => {
-        fetch("/services.json") 
+        fetch("http://localhost:3000/partners") 
             .then((res) => res.json())
             .then((data) => 
                 setServices(data)
@@ -35,7 +35,7 @@ const Home = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-6">
                     {services.map((service) => (
-                        <ServiceCard key={service.serviceId} service={service} />
+                        <ServiceCard key={service._id} service={service} />
                       
                         
                         
