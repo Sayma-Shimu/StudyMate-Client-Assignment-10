@@ -6,13 +6,15 @@ import Profile from "../pages/Profile";
 import Services from "../pages/Services";
 import PrivateRoute from "../components/PrivateRoute";
 import EditProfile from "../pages/EditProfile";
-import ServiceCard from "../components/ServiceCard";
+// import ServiceCard from "../components/ServiceCard";
 import AuthLayout from "../pages/AuthLayout";
 import Register from "../pages/Register";
 import Forget from "../pages/Forget";
 import ErrorPage from "../pages/ErrorPage";
 import CardDetails from "../components/CardDetails";
 import FindPartners from "../pages/FindPartners";
+
+import DetailsPage from "../pages/DetailsPage";
 
 
 const router = createBrowserRouter([
@@ -27,8 +29,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/find-partners',
-                element: <FindPartners/>,
-                loader:() => fetch('http://localhost:3000/partners')
+                element: <FindPartners />,
+                loader: () => fetch('http://localhost:3000/partners').then(res => res.json())
             },
 
             {
@@ -49,6 +51,13 @@ const router = createBrowserRouter([
                     <EditProfile></EditProfile>
                 </PrivateRoute>,
             },
+            {
+                path: "/details/:id",
+                element: <DetailsPage />,
+                loader: ({ params }) =>
+                    fetch(`http://localhost:3000/partners/${params.id}`).then(res => res.json())
+            },
+
 
             {
                 path: '/service/:id',
@@ -56,7 +65,7 @@ const router = createBrowserRouter([
                     {/* <ServiceCard></ServiceCard> */}
                     <CardDetails></CardDetails>
                 </PrivateRoute>,
-                hydrateFallbackElement:<p>Loading...</p>
+                hydrateFallbackElement: <p>Loading...</p>
             },
         ]
     },

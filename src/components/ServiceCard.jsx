@@ -61,9 +61,9 @@ Subject: <span className="font-medium text-gray-800 dark:text-gray-200">{service
 
 
 {/* View Profile Button */}
-<button className="mt-auto w-full py-2 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 text-white font-semibold shadow hover:opacity-90 transition">
+<Link to={`/details/${service._id}`} className="mt-auto w-full py-2 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 text-white font-semibold shadow hover:opacity-90 transition">
 View Profile
-</button>
+</Link>
 </div>
 </div>
 
