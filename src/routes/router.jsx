@@ -52,11 +52,13 @@ const router = createBrowserRouter([
                 </PrivateRoute>,
             },
             {
-                path: "/details/:id",
-                element: <DetailsPage />,
-                loader: ({ params }) =>
-                    fetch(`http://localhost:3000/partners/${params.id}`).then(res => res.json())
-            },
+        path: "/details/:id",
+        element: <DetailsPage />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/partners/${params.id}`).then((res) =>
+            res.json()
+          ),
+      },
 
 
             {
