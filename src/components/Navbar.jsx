@@ -56,7 +56,7 @@ const Navbar = () => {
             <NavLink to='/profile' className={({ isActive }) =>
           `font-semibold dark:text-white ${isActive ? "text-blue-600 underline" : "text-gray-700"}`
         }>Profile</NavLink>
-        <NavLink to='/profile' className={({ isActive }) =>
+        <NavLink to='/my-connections' className={({ isActive }) =>
           `font-semibold dark:text-white ml-3 ${isActive ? "text-blue-600 underline" : "text-gray-700"}`
         }>My Connections</NavLink>
         </div>

@@ -15,6 +15,7 @@ import CardDetails from "../components/CardDetails";
 import FindPartners from "../pages/FindPartners";
 
 import DetailsPage from "../pages/DetailsPage";
+import MyConnections from "../pages/MyConnections";
 
 
 const router = createBrowserRouter([
@@ -59,7 +60,10 @@ const router = createBrowserRouter([
             res.json()
           ),
       },
-
+{
+    path:'/my-connections',
+    element: <MyConnections/>
+},
 
             {
                 path: '/service/:id',
