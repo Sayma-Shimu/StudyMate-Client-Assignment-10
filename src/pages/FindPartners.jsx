@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-// import { useLoaderData } from "react-router-dom";
-
-import ServiceCard from "../components/ServiceCard";
 import { useLoaderData } from "react-router";
+import ServiceCard from "../components/ServiceCard";
 
 const FindPartners = () => {
   const data = useLoaderData();

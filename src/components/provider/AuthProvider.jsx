@@ -11,11 +11,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../../firebase/firebase.config";
+import { p } from "framer-motion/client";
 
-// 🔹 Context create korlam
+//  Context create korlam
 export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope('email')
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
@@ -50,12 +52,18 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      const email = currentUser.email || currentUser.providerData[0].email
+
+      setUser({...currentUser, email});
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  if (loading){
+    return <p>loading....</p>
+  }
 
   const authData = {
     user,
@@ -70,7 +78,7 @@ const AuthProvider = ({ children }) => {
     passwordReset,
   };
 
-  // 🔹 এখানে আসল ভুলটা ছিল — এখন ঠিক করা হয়েছে
+  
   return (
     <AuthContext.Provider value={authData}>
       {children}

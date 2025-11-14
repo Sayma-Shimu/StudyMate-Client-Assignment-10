@@ -62,7 +62,9 @@ const router = createBrowserRouter([
       },
 {
     path:'/my-connections',
-    element: <MyConnections/>
+    element: 
+        <MyConnections/>
+   
 },
 
             {
