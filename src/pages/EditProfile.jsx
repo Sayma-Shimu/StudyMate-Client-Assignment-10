@@ -1,75 +1,112 @@
-import { use } from "react"
-import { AuthContext } from "../components/provider/AuthProvider"
-import { useNavigate } from "react-router"
-import { toast } from "react-toastify"
-
+import React, { useContext, useEffect, useState } from "react";
+// import { AuthContext } from "../components/provider/AuthProvider";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { AuthContext } from "../components/provider/AuthProvider";
+import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const userEmail = user?.email;
 
-    const { user, updateUser, setUser } = use(AuthContext)
-    const Navigate = useNavigate()
+  const [profile, setProfile] = useState({});
 
-    const handleUpdate = (e) => {
+  useEffect(() => {
+    if (!userEmail) return;
+    axios
+      .get(`http://localhost:3000/partners?email=${userEmail}`)
+      .then((res) => setProfile(res.data[0] || {}))
+      .catch(() => toast.error("Failed to load profile"));
+  }, [userEmail]);
 
-        e.preventDefault()
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    axios
+      .patch(`http://localhost:3000/partners/${profile._id}`, profile)
+      .then(() => {
+        toast.success("Profile Updated Successfully!");
+        navigate("/profile");
+      })
+      .catch(() => toast.error("Update failed"));
+  };
 
-        const form = e.target;
+  return (
+    <div className="max-w-2xl mx-auto mt-12 bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-3xl font-bold text-center mb-6">Edit Profile</h2>
 
-        const name = form.name.value;
-        const photo = form.photo.value;
+      <form onSubmit={handleUpdate} className="grid gap-4">
+        
+        <input
+          type="text"
+          value={profile.name || ""}
+          onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+          className="input input-bordered"
+          placeholder="Name"
+        />
 
-        const updatedName = name || user?.displayName;
-        const updatedPhoto = photo || user?.photoURL;
+        <input
+          type="text"
+          value={profile.profileImage || ""}
+          onChange={(e) =>
+            setProfile({ ...profile, profileImage: e.target.value })
+          }
+          className="input input-bordered"
+          placeholder="Profile Image URL"
+        />
 
+        <input
+          type="text"
+          value={profile.subject || ""}
+          onChange={(e) => setProfile({ ...profile, subject: e.target.value })}
+          className="input input-bordered"
+          placeholder="Subject"
+        />
 
-        updateUser({ displayName: updatedName, photoURL: updatedPhoto }).then(() => {
-            setUser({ ...user, displayName: updatedName, photoURL: updatedPhoto });
-           Navigate('/profile');
-            toast.success('Profile Updated!')
-        })
-        .catch(err=>{
-            alert(err.message)
-        })
+        <select
+          value={profile.studyMode || ""}
+          onChange={(e) => setProfile({ ...profile, studyMode: e.target.value })}
+          className="select select-bordered"
+        >
+          <option>Online</option>
+          <option>Offline</option>
+        </select>
 
-     }
+        <input
+          type="text"
+          value={profile.availabilityTime || ""}
+          onChange={(e) =>
+            setProfile({ ...profile, availabilityTime: e.target.value })
+          }
+          className="input input-bordered"
+          placeholder="Availability Time"
+        />
 
+        <input
+          type="text"
+          value={profile.location || ""}
+          onChange={(e) => setProfile({ ...profile, location: e.target.value })}
+          className="input input-bordered"
+          placeholder="Location"
+        />
 
-    return (
+        <select
+          value={profile.experienceLevel || ""}
+          onChange={(e) =>
+            setProfile({ ...profile, experienceLevel: e.target.value })
+          }
+          className="select select-bordered"
+        >
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Expert</option>
+        </select>
 
-        <div className='flex justify-center items-center min-h-screen'>
-          <title>Edit Profile</title>
-            <div className="hero bg-base-200 min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
+        <button className="btn bg-blue-600 text-white mt-4">Save Changes</button>
+      </form>
+    </div>
+  );
+};
 
-
-
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                        <h1 className='font-semibold text-2xl text-center '>Edit Your Profile</h1>
-                        <form onSubmit={handleUpdate} className="card-body">
-
-                            <fieldset className="fieldset">
-
-                                <label className="label">Name</label>
-                                <input name='name' type="text" className="input" placeholder="Name" />
-
-                                <label className="label">Photo URL</label>
-                                <input name='photo' type="text" className="input" placeholder="Photo URL" />
-
-
-                                <button type='submit' className="btn bg-blue-800 hover:bg-blue-500 mt-4 text-white">Update Information</button>
-
-
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-    )
-}
-
-export default EditProfile
+export default EditProfile;
