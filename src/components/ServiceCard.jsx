@@ -29,8 +29,6 @@ const handleSendRequest = () => {
     });
 };
 
-
-
   return (
     <div className="p-4 border rounded-xl shadow-md">
       <img src={service.profileImage} className="w-full object-cover h-40 rounded-lg" />
