@@ -4,6 +4,8 @@ import React from 'react'
 import { useLoaderData } from 'react-router';
 import Banner from '../components/Banner';
 import ServiceCard from '../components/ServiceCard';
+import HowItWorks from '../components/HowItWorks';
+import Testimonials from '../components/Testimonials';
 
 const Home = () => {
     const data = useLoaderData();
@@ -22,6 +24,8 @@ const Home = () => {
                     <ServiceCard key={partner._id} service={partner} />
                 ))}
             </div>
+            <HowItWorks></HowItWorks>
+            <Testimonials></Testimonials>
         </div>
     )
 }
