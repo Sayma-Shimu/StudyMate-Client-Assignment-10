@@ -6,24 +6,30 @@ import { AuthContext } from "./provider/AuthProvider";
 
 const ServiceCard = ({ service }) => {
   const { user } = useContext(AuthContext);
-  const userEmail = user?.email;
-  console.log(user);
+  const userEmail = user?.email || user?.providerData[0]?.email;
+  
+  console.log(userEmail);
   
 
-  const handleSendRequest = () => {
-    if (!userEmail) return toast.error("Please login to send a request");
+const handleSendRequest = () => {
+  if (!userEmail) return toast.error("Please login to send a request");
 
-    fetch(`http://localhost:3000/send-request/${service._id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userEmail }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) toast.success("Request sent!");
-        else toast.error(data.message);
-      });
-  };
+  fetch(`http://localhost:3000/send-request/${service._id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userEmail }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        toast.success("Request sent! PartnerCount updated.");
+      } else {
+        toast.error(data.message);
+      }
+    });
+};
+
+
 
   return (
     <div className="p-4 border rounded-xl shadow-md">

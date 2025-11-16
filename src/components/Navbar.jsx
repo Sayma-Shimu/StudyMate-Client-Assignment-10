@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import { AuthContext } from './provider/AuthProvider'
 
 const Navbar = () => {
-  const { user, logOut } = use(AuthContext);
+  const { user, logOut, setUser } = use(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
     useEffect(() => {
@@ -25,6 +25,7 @@ const Navbar = () => {
 
     logOut()
       .then(() => {
+        setUser(null)
         toast.success("your logged out sucessfully")
 
       }).catch((error) => {
