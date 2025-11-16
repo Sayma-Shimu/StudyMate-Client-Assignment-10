@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                loader: () => fetch("/services.json"),
+                loader: () => fetch("http://localhost:3000/partners/top-rated"),
             },
             {
                 path: '/find-partners',
