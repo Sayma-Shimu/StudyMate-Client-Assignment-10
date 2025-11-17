@@ -15,10 +15,12 @@ const EditProfile = () => {
     if (!userEmail) return;
 
     axios
-      .get(`http://localhost:3000/partners?email=${userEmail}`)
+      .get(`http://localhost:3000/profile?email=${userEmail}`)
       .then((res) => {
-        if (res.data.length > 0) setProfile(res.data[0]);
-        else toast.error("Profile not found");
+        // if (res.data.length > 0) setProfile(res.data[0]);
+        // else toast.error("Profile not found");
+        console.log(res.data)
+        setProfile(res.data)
       })
       .catch(() => toast.error("Failed to load profile"));
   }, [userEmail]);
@@ -29,7 +31,7 @@ const EditProfile = () => {
 
     try {
       const res = await axios.patch(
-        `http://localhost:3000/partners/${profile._id}`,
+        `http://localhost:3000/profile/update/${profile._id}`,
         {
           name: profile.name,
           profileImage: profile.profileImage,
