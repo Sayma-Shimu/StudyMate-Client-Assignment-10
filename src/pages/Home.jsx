@@ -8,7 +8,7 @@ import Testimonials from '../components/Testimonials';
 const Home = () => {
     const data = useLoaderData();
 
-    if (!Array.isArray(data)) {
+    if (!Array.isArray(data.data)) {
         return <p>No partners found</p>;
     }
 
@@ -17,7 +17,7 @@ const Home = () => {
             <Banner />
 
             <div className="grid md:grid-cols-3 bg-green-50 gap-5 w-11/12 mx-auto">
-                {data.map((partner) => (
+                {data.data.map((partner) => (
                     <ServiceCard key={partner._id} service={partner} />
                 ))}
             </div>

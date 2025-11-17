@@ -16,6 +16,7 @@ import FindPartners from "../pages/FindPartners";
 
 import DetailsPage from "../pages/DetailsPage";
 import MyConnections from "../pages/MyConnections";
+import axios from "axios";
 
 
 const router = createBrowserRouter([
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                loader: () => fetch("http://localhost:3000/partners/top-rated"),
+                loader: () => axios.get("http://localhost:3000/partners/top-rated"),
             },
             {
                 path: '/find-partners',

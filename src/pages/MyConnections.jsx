@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../components/provider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyConnections = () => {
   const { user } = useContext(AuthContext);
@@ -13,9 +15,9 @@ const MyConnections = () => {
   useEffect(() => {
     if (!userEmail) return;
 
-    fetch(`http://localhost:3000/requests?email=${encodeURIComponent(userEmail)}`)
-      .then((res) => res.json())
-      .then((data) => setRequests(data))
+    axios.get(`http://localhost:3000/requests?email=${encodeURIComponent(userEmail)}`)
+      // .then((res) => res.json())
+      .then((data) => setRequests(data.data))
       .catch(() => toast.error("Failed to load requests"));
   }, [userEmail]);
 
@@ -26,51 +28,78 @@ const MyConnections = () => {
   };
 
   // UPDATE SUBMIT
-  const handleUpdateSubmit = async () => {
-    try {
-      const res = await fetch(`http://localhost:3000/requests/${editing._id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
 
-      const data = await res.json();
+const handleUpdateSubmit = async () => {
+  try {
+    const res = await axios.patch(
+      `http://localhost:3000/requests/${editing._id}`,
+      formData
+    );
 
-      if (data.success) {
-        toast.success("Updated successfully!");
+    const data = res.data;
 
-        setRequests((prev) =>
-          prev.map((item) =>
-            item._id === editing._id ? { ...item, ...formData } : item
-          )
-        );
+    if (data.success) {
+      toast.success("Updated successfully!");
 
-        setEditing(null);
-      }
-    } catch (err) {
-      toast.error("Update failed");
+      setRequests((prev) =>
+        prev.map((item) =>
+          item._id === editing._id ? { ...item, ...formData } : item
+        )
+      );
+
+      setEditing(null);
     }
-  };
+  } catch (err) {
+    toast.error("Update failed");
+  }
+};
+
 
   // DELETE
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this request?")) return;
 
-    try {
-      const res = await fetch(`http://localhost:3000/requests/${id}`, {
-        method: "DELETE",
+const handleDelete = async (id) => {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "This request will be permanently deleted!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel",
+    background: "#fefefe",
+    customClass: {
+      popup: "rounded-2xl shadow-lg",
+    },
+  });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    const res = await axios.delete(`http://localhost:3000/requests/${id}`);
+    const data = res.data;
+
+    if (data.success) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Deleted successfully!",
+        showConfirmButton: false,
+        timer: 1500,
       });
 
-      const data = await res.json();
-
-      if (data.success) {
-        toast.success("Deleted!");
-        setRequests((prev) => prev.filter((r) => r._id !== id));
-      }
-    } catch {
-      toast.error("Delete failed");
+      setRequests((prev) => prev.filter((r) => r._id !== id));
     }
-  };
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Delete failed! Try again.",
+    });
+  }
+};
+
+
 
   return (
     <div className="max-w-5xl mx-auto p-6">
