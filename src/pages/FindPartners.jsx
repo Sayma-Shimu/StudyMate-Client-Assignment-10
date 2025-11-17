@@ -33,7 +33,7 @@ const FindPartners = () => {
   }, [search, sortOrder]);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-6xl bg-gray-100 mx-auto">
       <div className="flex justify-between mb-6">
         <button
           onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}

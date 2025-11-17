@@ -12,7 +12,7 @@ const Step = ({ icon, title, desc }) => (
 
 const HowItWorks = () => {
   return (
-    <section className="py-12 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-12  ">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">How StudyMate Works</h2>
 
