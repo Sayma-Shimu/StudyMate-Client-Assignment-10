@@ -69,14 +69,14 @@ const router = createBrowserRouter([
    
 },
 
-            {
-                path: '/service/:id',
-                element: <PrivateRoute>
-                    {/* <ServiceCard></ServiceCard> */}
-                    <CardDetails></CardDetails>
-                </PrivateRoute>,
-                hydrateFallbackElement: <p>Loading...</p>
-            },
+            // {
+            //     path: '/service/:id',
+            //     element: <PrivateRoute>
+            //         {/* <ServiceCard></ServiceCard> */}
+            //         <CardDetails></CardDetails>
+            //     </PrivateRoute>,
+            //     hydrateFallbackElement: <p>Loading...</p>
+            // },
         ]
     },
 

@@ -17,7 +17,6 @@ const TestimonialCard = ({ t }) => (
 );
 
 const Testimonials = () => {
-  // Example testimonials — replace with server-side data later if you want
   const testimonials = [
     {
       name: "Rafi Ahmed",
