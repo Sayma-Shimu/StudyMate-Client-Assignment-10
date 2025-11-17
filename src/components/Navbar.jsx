@@ -88,7 +88,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             {/* User avatar */}
             {user && (
-              <div className="relative group">
+              <div className=" group">
                 <img
                   src={user.photoURL || userImage}
                   alt="user"

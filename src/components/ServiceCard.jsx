@@ -6,7 +6,8 @@ import axios from "axios";
 
 const ServiceCard = ({ service, showExperienceLevel = false }) => {
   const { user } = useContext(AuthContext);
-  const userEmail = user?.email || user?.providerData[0]?.email;
+ const userEmail = user?.email || user?.providerData?.[0]?.email || null;
+
 
   const handleSendRequest = () => {
     if (!userEmail) return toast.error("Please login to send a request");

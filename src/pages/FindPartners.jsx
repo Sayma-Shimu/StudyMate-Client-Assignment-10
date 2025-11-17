@@ -6,20 +6,26 @@ const FindPartners = () => {
   const [partners, setPartners] = useState([]);
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPartners = async () => {
       try {
+        setLoading(true);
+
         const response = await axios.get("http://localhost:3000/partners", {
           params: {
             search: search,
             sort: sortOrder,
           },
         });
+
         setPartners(response.data.data || []);
       } catch (error) {
         console.error("Error fetching partners:", error);
-        setPartners([]); 
+        setPartners([]);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -44,6 +50,19 @@ const FindPartners = () => {
         />
       </div>
 
+   
+      {loading && (
+        <p className="text-center text-lg font-semibold">Loading...</p>
+      )}
+
+     
+      {!loading && partners.length === 0 && (
+        <p className="text-center text-red-500 text-lg font-semibold">
+          No partners found 
+        </p>
+      )}
+
+   
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {partners.map((partner) => (
           <ServiceCard
