@@ -17,6 +17,7 @@ import FindPartners from "../pages/FindPartners";
 import DetailsPage from "../pages/DetailsPage";
 import MyConnections from "../pages/MyConnections";
 import axios from "axios";
+import { Loading } from "../pages/Loading";
 
 
 const router = createBrowserRouter([
@@ -27,12 +28,12 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                loader: () => axios.get("http://localhost:3000/partners/top-rated"),
+                loader: () => axios.get("http://localhost:3000/partners/top-rated")
             },
             {
                 path: '/find-partners',
                 element: <FindPartners />,
-                loader: () => fetch('http://localhost:3000/partners').then(res => res.json())
+                loader: () => axios.get('http://localhost:3000/partners'),
             },
 
             {
@@ -53,14 +54,14 @@ const router = createBrowserRouter([
                     <EditProfile></EditProfile>
                 </PrivateRoute>,
             },
-            {
-        path: "/details/:id",
-        element: <DetailsPage />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/partners/${params.id}`).then((res) =>
-            res.json()
-          ),
-      },
+   {
+  path: "/details/:id",
+  element: <DetailsPage />,
+  loader: async ({ params }) => {
+    const res = await axios.get(`http://localhost:3000/partners/${params.id}`);
+    return res.data;
+  },
+},
 {
     path:'/my-connections',
     element: 

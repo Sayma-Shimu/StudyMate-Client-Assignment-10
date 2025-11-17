@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 import { p } from "framer-motion/client";
+import { Loading } from "../../pages/Loading";
 
 //  Context create korlam
 export const AuthContext = createContext();
@@ -62,7 +63,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   if (loading){
-    return <p>loading....</p>
+    return <div className=""><Loading/></div>
   }
 
   const authData = {

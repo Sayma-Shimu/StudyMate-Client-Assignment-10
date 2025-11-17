@@ -16,7 +16,6 @@ const MyConnections = () => {
     if (!userEmail) return;
 
     axios.get(`http://localhost:3000/requests?email=${encodeURIComponent(userEmail)}`)
-      // .then((res) => res.json())
       .then((data) => setRequests(data.data))
       .catch(() => toast.error("Failed to load requests"));
   }, [userEmail]);

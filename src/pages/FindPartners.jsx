@@ -9,7 +9,7 @@ const FindPartners = () => {
 
   const [sortOrder, setSortOrder] = useState("asc"); 
 
-  const filtered = data.filter((p) =>
+  const filtered = data.data.filter((p) =>
     p.subject.toLowerCase().includes(search.toLowerCase())
   );
 
