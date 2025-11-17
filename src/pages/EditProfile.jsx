@@ -15,7 +15,7 @@ const EditProfile = () => {
     if (!userEmail) return;
 
     axios
-      .get(`http://localhost:3000/profile?email=${userEmail}`)
+      .get(`https://study-mates-projects.vercel.app/profile?email=${userEmail}`)
       .then((res) => {
         // if (res.data.length > 0) setProfile(res.data[0]);
         // else toast.error("Profile not found");
@@ -31,7 +31,7 @@ const EditProfile = () => {
 
     try {
       const res = await axios.patch(
-        `http://localhost:3000/profile/update/${profile._id}`,
+        `https://study-mates-projects.vercel.app/profile/update/${profile._id}`,
         {
           name: profile.name,
           profileImage: profile.profileImage,

@@ -21,7 +21,7 @@ const DetailsPage = () => {
   const handleSendRequest = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:3000/send-request/${partner._id}`,
+        `https://study-mates-projects.vercel.app/send-request/${partner._id}`,
         { userEmail: user?.email }
       );
 

@@ -6,14 +6,11 @@ import Profile from "../pages/Profile";
 import Services from "../pages/Services";
 import PrivateRoute from "../components/PrivateRoute";
 import EditProfile from "../pages/EditProfile";
-// import ServiceCard from "../components/ServiceCard";
 import AuthLayout from "../pages/AuthLayout";
 import Register from "../pages/Register";
 import Forget from "../pages/Forget";
 import ErrorPage from "../pages/ErrorPage";
-import CardDetails from "../components/CardDetails";
 import FindPartners from "../pages/FindPartners";
-
 import DetailsPage from "../pages/DetailsPage";
 import MyConnections from "../pages/MyConnections";
 import axios from "axios";
@@ -28,12 +25,12 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-                loader: () => axios.get("http://localhost:3000/partners/top-rated")
+                loader: () => axios.get("https://study-mates-projects.vercel.app/partners/top-rated")
             },
             {
                 path: '/find-partners',
                 element: <FindPartners />,
-                loader: () => axios.get('http://localhost:3000/partners'),
+                loader: () => axios.get('https://study-mates-projects.vercel.app/partners'),
             },
 
             {
@@ -58,7 +55,7 @@ const router = createBrowserRouter([
   path: "/details/:id",
   element: <DetailsPage />,
   loader: async ({ params }) => {
-    const res = await axios.get(`http://localhost:3000/partners/${params.id}`);
+    const res = await axios.get(`https://study-mates-projects.vercel.app/partners/${params.id}`);
     return res.data;
   },
 },

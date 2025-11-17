@@ -76,7 +76,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="logo" className="w-12 h-12 rounded-full" />
-            <h1 className="text-xl font-bold text-green-700">StudyMates</h1>
+            <h1 className="text-3xl font-extrabold tracking-wide text-green-700">StudyMates</h1>
           </Link>
 
           {/* Desktop Nav */}

@@ -1,4 +1,4 @@
-// components/HowItWorks.jsx
+
 import React from "react";
 import { FaSearch, FaUserPlus, FaHandshake } from "react-icons/fa";
 

@@ -16,32 +16,27 @@ const fadeUp = {
 };
 const Banner = () => {
   const [active, setActive] = useState(0);
-  const slides = [
-    {
-      id: 1,
-      img: collaborateLearning,
-      title: "Clean Together, Live Better.",
-      text: "When we unite to clean our surroundings, we create a healthier, happier, and more peaceful community for everyone.",
-    },
-    {
-      id: 2,
-      img:onlineLearning,
-      title:  "Learn Together from Anywhere",
-      text: "Online or Offline — StudyMate Makes It Easy!",
-    },
-    {
-      id: 3,
-      img: groupStudy,
-      title: "Sustain Today for a Greener Tomorrow.",
-      text: "Small actions like recycling, proper waste disposal, and tree planting build the foundation of a sustainable future.",
-    },
-    // {
-    //   id: 4,
-    //   img: awarenessCampaign,
-    //   title: "Together for a cleaner tomorrow.",
-    //   text: "Join awareness campaigns and inspire others to take action — because change starts when the community cares.",
-    // },
-  ];
+ const slides = [
+  {
+    id: 1,
+    img: collaborateLearning,
+    title: "Find the Perfect Study Partner.",
+    text: "Collaborate, share knowledge, and stay motivated with someone who matches your learning goals.",
+  },
+  {
+    id: 2,
+    img: onlineLearning,
+    title: "Learn Anytime, From Anywhere.",
+    text: "Connect with students online or offline — StudyMate makes study sessions simple and flexible.",
+  },
+  {
+    id: 3,
+    img: groupStudy,
+    title: "Study Smarter with Group Learning.",
+    text: "Join group sessions, solve problems together, and boost your academic performance faster.",
+  },
+];
+
   return (
     <div className="w-11/12 mx-auto my-8 rounded-xl overflow-hidden">
       <Swiper

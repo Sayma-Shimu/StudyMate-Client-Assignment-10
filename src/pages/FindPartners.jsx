@@ -13,7 +13,7 @@ const FindPartners = () => {
       try {
         setLoading(true);
 
-        const response = await axios.get("http://localhost:3000/partners", {
+        const response = await axios.get("https://study-mates-projects.vercel.app/partners", {
           params: {
             search: search,
             sort: sortOrder,

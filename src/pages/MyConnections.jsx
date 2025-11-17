@@ -15,7 +15,7 @@ const MyConnections = () => {
   useEffect(() => {
     if (!userEmail) return;
 
-    axios.get(`http://localhost:3000/requests?email=${encodeURIComponent(userEmail)}`)
+    axios.get(`https://study-mates-projects.vercel.app/requests?email=${encodeURIComponent(userEmail)}`)
       .then((data) => setRequests(data.data))
       .catch(() => toast.error("Failed to load requests"));
   }, [userEmail]);
@@ -31,7 +31,7 @@ const MyConnections = () => {
 const handleUpdateSubmit = async () => {
   try {
     const res = await axios.patch(
-      `http://localhost:3000/requests/${editing._id}`,
+      `https://study-mates-projects.vercel.app/requests/${editing._id}`,
       formData
     );
 
@@ -75,7 +75,7 @@ const handleDelete = async (id) => {
   if (!result.isConfirmed) return;
 
   try {
-    const res = await axios.delete(`http://localhost:3000/requests/${id}`);
+    const res = await axios.delete(`https://study-mates-projects.vercel.app/requests/${id}`);
     const data = res.data;
 
     if (data.success) {
@@ -108,7 +108,7 @@ const handleDelete = async (id) => {
       <div className="overflow-x-auto">
         <table className="w-full table-auto border">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 dark:bg-black">
               <th className="p-3">Partner</th>
               <th className="p-3">Subject</th>
               <th className="p-3">Study Mode</th>

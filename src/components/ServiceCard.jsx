@@ -13,7 +13,7 @@ const ServiceCard = ({ service, showExperienceLevel = false }) => {
     if (!userEmail) return toast.error("Please login to send a request");
 
     axios
-      .post(`http://localhost:3000/send-request/${service._id}`, { userEmail })
+      .post(`https://study-mates-projects.vercel.app/send-request/${service._id}`, { userEmail })
       .then((res) => {
         if (res.data.success) {
           toast.success("Request sent! PartnerCount updated.");
