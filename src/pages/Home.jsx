@@ -1,6 +1,4 @@
 import React from 'react'
-// import ServiceCard from "../components/ServiceCard";
-// import Banner from '../components/Banner'
 import { useLoaderData } from 'react-router';
 import Banner from '../components/Banner';
 import ServiceCard from '../components/ServiceCard';
@@ -10,7 +8,6 @@ import Testimonials from '../components/Testimonials';
 const Home = () => {
     const data = useLoaderData();
 
-    // safety check
     if (!Array.isArray(data)) {
         return <p>No partners found</p>;
     }

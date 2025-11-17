@@ -7,7 +7,7 @@ const MyConnections = () => {
   const userEmail = user?.email;
 
   const [requests, setRequests] = useState([]);
-  const [editing, setEditing] = useState(null); // selected request for update
+  const [editing, setEditing] = useState(null); 
   const [formData, setFormData] = useState({ note: "" });
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const MyConnections = () => {
       .catch(() => toast.error("Failed to load requests"));
   }, [userEmail]);
 
-  // OPEN UPDATE FORM
+  // OPEN UPDATE 
   const openUpdateForm = (req) => {
     setEditing(req);
     setFormData({ note: req.note || "" });

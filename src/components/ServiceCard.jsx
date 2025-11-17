@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "./provider/AuthProvider";
+import axios from "axios";
 
 
 const ServiceCard = ({ service }) => {
@@ -14,14 +15,9 @@ const ServiceCard = ({ service }) => {
 const handleSendRequest = () => {
   if (!userEmail) return toast.error("Please login to send a request");
 
-  fetch(`http://localhost:3000/send-request/${service._id}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userEmail }),
-  })
-    .then((res) => res.json())
+   axios.post(`http://localhost:3000/send-request/${service._id}`, {userEmail})
     .then((data) => {
-      if (data.success) {
+      if (data.data.success) {
         toast.success("Request sent! PartnerCount updated.");
       } else {
         toast.error(data.message);
