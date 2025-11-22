@@ -15,10 +15,10 @@ const Home = () => {
     return (
         <div className='bg-gray-100'>
             <Banner />
-<h2 className="text-3xl font-bold text-center text-blue-700 mb-8">Top Rated Study Partners</h2>
+            <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">Top Rated Study Partners</h2>
             <div className="grid md:grid-cols-3 bg-green-50 gap-5 w-11/12 mx-auto">
                 {data.data.map((partner) => (
-                    <ServiceCard key={partner._id} service={partner} showExperienceLevel = {false}/>
+                    <ServiceCard key={partner._id} service={partner} showExperienceLevel={false} />
                 ))}
             </div>
             <HowItWorks></HowItWorks>

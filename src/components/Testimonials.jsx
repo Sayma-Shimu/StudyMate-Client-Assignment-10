@@ -1,7 +1,6 @@
-// components/Testimonials.jsx
+
 import React from "react";
 
-// Minimal testimonial card
 const TestimonialCard = ({ t }) => (
   <div className="bg-white p-5 rounded-xl shadow-sm border">
     <div className="flex items-center gap-4 mb-3">

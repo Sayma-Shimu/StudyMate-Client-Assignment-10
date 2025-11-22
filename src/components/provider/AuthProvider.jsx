@@ -11,10 +11,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../../firebase/firebase.config";
-import { p } from "framer-motion/client";
 import { Loading } from "../../pages/Loading";
 
-//  Context create korlam
+//  Context
 export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider();
@@ -43,9 +42,9 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, updatedData);
   };
 
-  const passwordReset = (email) => {
-    return sendPasswordResetEmail(auth, email);
-  };
+  // const passwordReset = (email) => {
+  //   return sendPasswordResetEmail(auth, email);
+  // };
 
   const logOut = () => {
     return signOut(auth);
@@ -76,7 +75,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     updateUser,
     signInWithGoogle,
-    passwordReset,
+    // passwordReset,
   };
 
   

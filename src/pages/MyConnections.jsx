@@ -20,13 +20,13 @@ const MyConnections = () => {
       .catch(() => toast.error("Failed to load requests"));
   }, [userEmail]);
 
-  // OPEN UPDATE 
+  // open submit
   const openUpdateForm = (req) => {
     setEditing(req);
     setFormData({ note: req.note || "" });
   };
 
-  // UPDATE SUBMIT
+  // update submit
 
 const handleUpdateSubmit = async () => {
   try {
@@ -49,6 +49,7 @@ const handleUpdateSubmit = async () => {
       setEditing(null);
     }
   } catch (err) {
+    console.log(err)
     toast.error("Update failed");
   }
 };
@@ -90,6 +91,7 @@ const handleDelete = async (id) => {
       setRequests((prev) => prev.filter((r) => r._id !== id));
     }
   } catch (error) {
+    console.log(error)
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -104,7 +106,7 @@ const handleDelete = async (id) => {
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-3xl font-semibold mb-5">My Connections</h1>
 
-      {/* TABLE */}
+      {/*table*/}
       <div className="overflow-x-auto">
         <table className="w-full table-auto border">
           <thead>
@@ -164,7 +166,7 @@ const handleDelete = async (id) => {
         </table>
       </div>
 
-      {/* UPDATE MODAL */}
+      {/*upadete modal */}
       {editing && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
           <div className="bg-white p-6 w-96 rounded-lg shadow-lg">

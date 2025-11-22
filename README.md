@@ -1,49 +1,36 @@
-WarmPaws – Pet Care in Winter
+## StudyMate — Find Your Perfect Study Partner
 
-A responsive React web app for pet lovers to ensure proper winter care for their furry friends. It includes authentication, protected routes, fake JSON-based data, and user-friendly UI components.
+A MERN Stack web platform that helps students discover ideal study partners based on subjects, skills, experience level, and location. StudyMate makes learning interactive through curated profiles, partner requests, and smart collaboration tools.
 
-Features :
+## Live Links
+Client Live: YOUR_CLIENT_LINK
+Server Live: YOUR_SERVER_LINK
 
-Winter Care Tips for Pets (Static / Fake JSON data)
+## Tech Stack
+MongoDB | Express.js | React.js | Node.js | Firebase Auth | Axios
 
-Meet Our Expert Vets section (Static Data – 3–4 experts)
+## Core Features
+1. Firebase Authentication with Email/Password + Google Login
+2. Create & Manage Study Partner Profiles (CRUD)
+3. Search & Sort Partners by subject and experience level
+4. Top Rated Partners section on Home page
+5. Send Partner Request (with partner count auto-increment)
+6. My Connections Page — update & delete requests
+7. Dark / Light Theme Toggle
+8. Animation Support (Lottie / Typewriter / Reveal)
+9. Custom 404 Page & Custom Loader
+10. Fully Responsive Modern UI
 
-Service List & Details Page
+## Pages Overview
+1. Home → Banner Slider, Top Study Partners, How It Works, Testimonials
+2. Find Partners → All profiles + Search + Sort
+3. Create Partner Profile → Form (Private)
+4. Partner Details → Full info + Send Request
+5. My Connections → Update/Delete partner requests
+6. Login / Register → Social login included
 
-Shows all JSON data fields
-
-Protected route – only accessible after login
-
-Redirects back after login
-
-📅 Book Service Form
-
-Fields: Name, Email
-
-Button: “Book Now”
-
-Shows success toast on submit (no backend)
-
-🔒 Authentication System
-
-Login / Signup
-
-Logout functionality
-
-Uses AuthContext + PrivateRoute
-
-🧭 Dynamic Routing with React Router
-
-💅 Responsive Layout & Styling with Tailwind CSS
-
-🎉 Toast Notifications using react-toastify
-
-🧩 Technologies Used
-Category	Tech
-Frontend	React.js
-Routing	React Router DOM
-Styling	Tailwind CSS
-Toast Notifications	React Toastify
-Fake Data	JSON
-State Management	Context API
-Package Manager	npm / yarn
+## Server Highlights
+MongoDB CRUD
+Partner Request using $inc
+Duplicate request prevention
+Regex-based filtering (optional)

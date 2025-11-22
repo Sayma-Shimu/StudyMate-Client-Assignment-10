@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router';
- 
+
 const Login = () => {
 
   const [toggle, setToggle] = useState(false)
@@ -17,7 +17,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleToggle = ()=>{
+  const handleToggle = () => {
     setToggle(!toggle)
   }
 
@@ -52,6 +52,10 @@ const Login = () => {
         console.log(user)
         setUser(user)
         navigate(`${location.state ? location.state : '/'}`)
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
         toast.success('You have logged in succesfully!')
       })
       .catch((error) => {
@@ -60,12 +64,6 @@ const Login = () => {
         setError(errrorCode);
       })
   }
-
-  const handleForgotPassword = () => {
-    navigate('/auth/resetPass', {
-      state: { email: emailRef.current?.value || '' },
-    });
-  };
 
 
   return (
@@ -79,20 +77,20 @@ const Login = () => {
             <form onSubmit={handleLogin} className="card-body">
 
               <fieldset className="fieldset">
-               
+
                 <label className="label">Email</label>
                 <input name='email' type="email" className="input" placeholder="Email" required ref={emailRef} />
-                
-                       
+
+
                 <div className='relative'>
                   <label className="label">Password</label>
-                  <input name='password' type={toggle? 'text' : 'password'} className="input" placeholder="Password" required />
-                  <div className='absolute bottom-3.5 right-3' onClick={handleToggle}>{toggle? <FaEyeSlash/> : <FaEye/>}</div>
-                  
+                  <input name='password' type={toggle ? 'text' : 'password'} className="input" placeholder="Password" required />
+                  <div className='absolute bottom-3.5 right-3' onClick={handleToggle}>{toggle ? <FaEyeSlash /> : <FaEye />}</div>
+
                 </div>
 
                 <div>
-                  <a onClick={handleForgotPassword} className='link link-hover'>Forgot password?</a>
+                  <a className='link link-hover'>Forgot password?</a>
                 </div>
 
                 {error && <p className='text-red-600 text-xs'> {error} </p>}

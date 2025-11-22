@@ -5,16 +5,14 @@ import logo from "../assets/logo.png";
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 mt-16">
-      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
 
-        {/* Logo + Project Info */}
         <div>
-          <div className="flex items-center gap-3">
-            <img 
-              src={logo} 
-              alt="StudyMate Logo" 
-              className="w-12 h-12 object-contain"
+          <div className="flex items-center ">
+            <img
+              src={logo}
+              alt="StudyMate Logo"
+              className="w-24 h-24 object-contain"
             />
             <h2 className="text-3xl font-extrabold text-white tracking-wide">
               StudyMate
@@ -27,28 +25,26 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Follow Us */}
         <div>
           <h3 className="text-lg font-semibold mb-4 text-white">
             Follow Us
           </h3>
           <div className="flex items-center gap-5 text-2xl">
-            <a href="#" className="hover:text-blue-500 transition">
+            <a href="https://www.facebook.com/" className="hover:text-blue-500 transition">
               <FaFacebook />
             </a>
-            <a href="#" className="hover:text-pink-500 transition">
+            <a href="https://www.instagram.com/accounts/login/?hl=en" className="hover:text-pink-500 transition">
               <FaInstagram />
             </a>
-            <a href="#" className="hover:text-sky-400 transition">
+            <a href="https://x.com/" className="hover:text-sky-400 transition">
               <FaTwitter />
             </a>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="https://www.linkedin.com/" className="hover:text-blue-600 transition">
               <FaLinkedin />
             </a>
           </div>
         </div>
 
-        {/* Contact Section */}
         <div>
           <h3 className="text-lg font-semibold mb-4 text-white">
             Contact Info
@@ -59,7 +55,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Footer */}
       <div className="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
         © {new Date().getFullYear()} StudyMate. All rights reserved.
       </div>

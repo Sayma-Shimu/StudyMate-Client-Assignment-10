@@ -11,6 +11,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [isOpen, setIsOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(false);
+console.log(user);
 
   // Theme toggle
   useEffect(() => {
@@ -23,7 +24,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        setUser(null);
+        setUser({email:null});
         toast.success("Logged out successfully!");
       })
       .catch((err) => console.log(err));
@@ -48,7 +49,7 @@ const Navbar = () => {
         Find Partners
       </NavLink>
 
-      {user && (
+      {user.email && (
         <>
           <NavLink
             to="/profile"
@@ -74,10 +75,9 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* TOP NAV */}
+    
         <div className="flex justify-between h-16 items-center">
 
-          {/* Logo Section */}
           <Link to="/" className="flex items-center gap-2">
             <img
               src={logo}
@@ -89,14 +89,14 @@ const Navbar = () => {
             </h1>
           </Link>
 
-          
+
           <div className="hidden md:flex gap-6 items-center">
             {navLinks}
           </div>
-         
+
           <div className="flex items-center gap-4">
 
-            {user && (
+            {user.email && (
               <div className="relative group hidden md:block">
                 <img
                   src={user.photoURL || userImage}
@@ -116,7 +116,7 @@ const Navbar = () => {
               </div>
             )}
 
-            {!user && (
+            {!user.email && (
               <div className="hidden md:flex gap-2">
                 <Link to="/auth/login" className="btn bg-green-600 text-white hover:bg-green-700">
                   Login
@@ -136,7 +136,6 @@ const Navbar = () => {
               />
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 rounded hover:bg-gray-200"
               onClick={() => setIsOpen(!isOpen)}
@@ -152,7 +151,6 @@ const Navbar = () => {
 
           {navLinks}
 
-          {/* MOBILE USER DROPDOWN */}
           {user && (
             <div>
               <div
@@ -192,7 +190,6 @@ const Navbar = () => {
             </>
           )}
 
-          {/* MOBILE THEME TOGGLE */}
           <div className="mt-2 flex items-center gap-2 dark:text-black">
             <input
               type="checkbox"

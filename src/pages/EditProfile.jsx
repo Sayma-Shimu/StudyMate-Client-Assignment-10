@@ -17,8 +17,6 @@ const EditProfile = () => {
     axios
       .get(`https://study-mates-projects.vercel.app/profile?email=${userEmail}`)
       .then((res) => {
-        // if (res.data.length > 0) setProfile(res.data[0]);
-        // else toast.error("Profile not found");
         console.log(res.data)
         setProfile(res.data)
       })

@@ -3,18 +3,17 @@ import HomeLayouts from "../layouts/HomeLayouts";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
-import Services from "../pages/Services";
 import PrivateRoute from "../components/PrivateRoute";
 import EditProfile from "../pages/EditProfile";
 import AuthLayout from "../pages/AuthLayout";
 import Register from "../pages/Register";
-import Forget from "../pages/Forget";
+// import Forget from "../pages/Forget";
 import ErrorPage from "../pages/ErrorPage";
 import FindPartners from "../pages/FindPartners";
 import DetailsPage from "../pages/DetailsPage";
 import MyConnections from "../pages/MyConnections";
 import axios from "axios";
-import { Loading } from "../pages/Loading";
+
 
 
 const router = createBrowserRouter([
@@ -33,10 +32,7 @@ const router = createBrowserRouter([
                 loader: () => axios.get('https://study-mates-projects.vercel.app/partners'),
             },
 
-            {
-                path: '/services',
-                element: <Services />
-            },
+
 
             {
                 path: '/profile',
@@ -90,10 +86,10 @@ const router = createBrowserRouter([
                 path: "/auth/register",
                 element: <Register></Register>,
             },
-            {
-                path: "/auth/resetPass",
-                element: <Forget></Forget>,
-            },
+            // {
+            //     path: "/auth/resetPass",
+            //     element: <Forget></Forget>,
+            // },
         ]
     },
 
