@@ -3,8 +3,9 @@
 A MERN Stack web platform that helps students discover ideal study partners based on subjects, skills, experience level, and location. StudyMate makes learning interactive through curated profiles, partner requests, and smart collaboration tools.
 
 ## Live Links
-Client Live: YOUR_CLIENT_LINK
-Server Live: YOUR_SERVER_LINK
+**Client Live:** [View Website](https://transcendent-custard-e217b3.netlify.app)  
+**Server Live:** [View API](https://study-mates-projects.vercel.app)
+
 
 ## Tech Stack
 MongoDB | Express.js | React.js | Node.js | Firebase Auth | Axios
