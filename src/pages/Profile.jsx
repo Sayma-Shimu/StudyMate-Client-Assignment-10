@@ -36,7 +36,7 @@ const Profile = () => {
         </div>
 
         <div className="p-6 text-center">
-          <Link to="/editprofile">
+          <Link to="/dashboard/editprofile">
             <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md transition-all duration-300">
               Edit Profile
             </button>

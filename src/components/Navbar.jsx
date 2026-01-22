@@ -8,10 +8,10 @@ import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 
 const Navbar = () => {
   const { user, logOut, setUser } = useContext(AuthContext);
+
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [isOpen, setIsOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(false);
-console.log(user);
 
   // Theme toggle
   useEffect(() => {
@@ -24,7 +24,7 @@ console.log(user);
   const handleLogout = () => {
     logOut()
       .then(() => {
-        setUser({email:null});
+        setUser({ email: null });
         toast.success("Logged out successfully!");
       })
       .catch((err) => console.log(err));
@@ -35,98 +35,54 @@ console.log(user);
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `font-semibold ${isActive ? "text-blue-600 bg-gray-200 hover:bg-gray-300 btn" : "text-gray-700"}`
+          `font-semibold px-3 py-2 rounded-md ${
+            isActive
+              ? "text-green-700 bg-green-100"
+              : "text-gray-700 hover:bg-gray-100"
+          }`
         }
       >
         Home
       </NavLink>
+
       <NavLink
         to="/find-partners"
         className={({ isActive }) =>
-          `font-semibold ${isActive ? "text-blue-600 bg-gray-200 hover:bg-gray-300 btn" : "text-gray-700"}`
+          `font-semibold px-3 py-2 rounded-md ${
+            isActive
+              ? "text-green-700 bg-green-100"
+              : "text-gray-700 hover:bg-gray-100"
+          }`
         }
       >
         Find Partners
       </NavLink>
 
-      {user.email && (
-        <>
-          <NavLink
-            to="/profile"
-            className={({ isActive }) =>
-              `font-semibold ${isActive ? "text-blue-600 bg-gray-200 hover:bg-gray-300 btn" : "text-gray-700"}`
-            }
-          >
-            Profile
-          </NavLink>
-          <NavLink
-            to="/my-connections"
-            className={({ isActive }) =>
-              `font-semibold ${isActive ? "text-blue-600 bg-gray-200 hover:bg-gray-300 btn" : "text-gray-700"}`
-            }
-          >
-            My Connections
-          </NavLink>
-        </>
-      )}
     </>
   );
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-        <div className="flex justify-between h-16 items-center">
+        <div className="flex justify-between items-center h-16">
 
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img
-              src={logo}
-              alt="logo"
-              className="w-28 h-28 object-contain"
-            />
-            <h1 className="text-xl font-extrabold tracking-wide text-green-700">
+            <img src={logo} alt="logo" className="w-10 h-10 object-contain" />
+            <h1 className="text-xl font-extrabold text-green-700">
               StudyMate
             </h1>
           </Link>
 
-
-          <div className="hidden md:flex gap-6 items-center">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-4 items-center">
             {navLinks}
           </div>
 
-          <div className="flex items-center gap-4">
+          {/* Right Side */}
+          <div className="flex items-center gap-3">
 
-            {user.email && (
-              <div className="relative group hidden md:block">
-                <img
-                  src={user.photoURL || userImage}
-                  alt="user"
-                  className="w-10 h-10 rounded-full cursor-pointer border-2 border-green-500"
-                />
-                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg opacity-0 group-hover:opacity-100 transition-opacity text-gray-700 p-2">
-                  <p className="text-sm font-medium">{user.displayName}</p>
-                  <p className="text-xs">{user.email}</p>
-                  <button
-                    onClick={handleLogout}
-                    className="mt-2 w-full py-1 bg-red-600 text-white rounded hover:bg-red-700"
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {!user.email && (
-              <div className="hidden md:flex gap-2">
-                <Link to="/auth/login" className="btn bg-green-600 text-white hover:bg-green-700">
-                  Login
-                </Link>
-                <Link to="/auth/register" className="btn bg-green-600 text-white hover:bg-green-700">
-                  Register
-                </Link>
-              </div>
-            )}
-
+            {/* Theme Toggle */}
             <div className="hidden md:block">
               <input
                 type="checkbox"
@@ -136,6 +92,55 @@ console.log(user);
               />
             </div>
 
+            {/* Profile Dropdown (Desktop) */}
+            {user?.email ? (
+              <div className="relative group hidden md:block">
+                <img
+                  src={user.photoURL || userImage}
+                  alt="user"
+                  className="w-10 h-10 rounded-full cursor-pointer border-2 border-green-500"
+                />
+
+                <div className="absolute right-0 mt-3 w-52 bg-white shadow-lg rounded-xl opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-200 p-3 text-gray-700">
+                  <div className="border-b pb-2 mb-2">
+                    <p className="text-sm font-semibold">
+                      {user.displayName || "User"}
+                    </p>
+                    <p className="text-xs text-gray-500">{user.email}</p>
+                  </div>
+
+                  <Link
+                    to="/dashboard"
+                    className="block px-3 py-2 rounded-md hover:bg-gray-100 font-medium"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="mt-2 w-full py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-semibold"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="hidden md:flex gap-2">
+                <Link
+                  to="/auth/login"
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/auth/register"
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 rounded hover:bg-gray-200"
               onClick={() => setIsOpen(!isOpen)}
@@ -146,57 +151,71 @@ console.log(user);
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white shadow-md px-4 py-4 flex flex-col gap-3 sticky z-50">
-
+        <div className="md:hidden bg-white shadow-md px-4 py-4 space-y-3">
           {navLinks}
 
-          {user && (
+          {/* Mobile Profile */}
+          {user?.email ? (
             <div>
               <div
-                className="flex items-center gap-3 mt-2 cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
                 onClick={() => setMobileDropdown(!mobileDropdown)}
               >
                 <img
                   src={user.photoURL || userImage}
-                  alt=""
+                  alt="user"
                   className="w-10 h-10 rounded-full border-2 border-green-500"
                 />
-                <span className="font-semibold dark:text-black">{user.displayName}</span>
+                <span className="font-semibold">
+                  {user.displayName || "User"}
+                </span>
               </div>
 
               {mobileDropdown && (
-                <div className="bg-gray-100 p-3 rounded-md mt-2">
-                  <p className="text-sm text-gray-700">{user.email}</p>
+                <div className="bg-gray-100 p-3 rounded-md mt-2 space-y-2">
+                  <Link
+                    to="/dashboard"
+                    className="block w-full text-center py-2 bg-white rounded hover:bg-gray-200"
+                  >
+                    Dashboard
+                  </Link>
                   <button
                     onClick={handleLogout}
-                    className="mt-2 w-full py-1 bg-red-600 text-white rounded"
+                    className="w-full py-2 bg-red-600 text-white rounded hover:bg-red-700"
                   >
                     Logout
                   </button>
                 </div>
               )}
             </div>
-          )}
-
-          {!user && (
+          ) : (
             <>
-              <Link to="/auth/login" className="btn bg-green-600 text-white w-full">
+              <Link
+                to="/auth/login"
+                className="block text-center py-2 bg-green-600 text-white rounded"
+              >
                 Login
               </Link>
-              <Link to="/auth/register" className="btn bg-green-600 text-white w-full">
+              <Link
+                to="/auth/register"
+                className="block text-center py-2 bg-green-600 text-white rounded"
+              >
                 Register
               </Link>
             </>
           )}
 
-          <div className="mt-2 flex items-center gap-2 dark:text-black">
+          {/* Mobile Theme Toggle */}
+          <div className="flex items-center gap-2">
             <input
               type="checkbox"
               className="toggle"
               checked={theme === "dark"}
               onChange={(e) => handleTheme(e.target.checked)}
             />
+            <span className="text-sm">Dark Mode</span>
           </div>
         </div>
       )}

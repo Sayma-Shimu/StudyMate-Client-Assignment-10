@@ -13,6 +13,8 @@ import FindPartners from "../pages/FindPartners";
 import DetailsPage from "../pages/DetailsPage";
 import MyConnections from "../pages/MyConnections";
 import axios from "axios";
+import DashboradLayout from "../layouts/DashboradLayout";
+import Overview from "../pages/Overview";
 
 
 
@@ -28,39 +30,20 @@ const router = createBrowserRouter([
             },
             {
                 path: '/find-partners',
-                element: <FindPartners />,
+                element: <PrivateRoute>
+                    <FindPartners />
+                </PrivateRoute>,
                 loader: () => axios.get('https://study-mates-projects.vercel.app/partners'),
             },
-
-
-
             {
-                path: '/profile',
-                element: <PrivateRoute>
-                    <Profile />
-                </PrivateRoute>
+                path: "/details/:id",
+                element: <DetailsPage />,
+                loader: async ({ params }) => {
+                    const res = await axios.get(`https://study-mates-projects.vercel.app/partners/${params.id}`);
+                    return res.data;
+                },
             },
 
-            {
-                path: '/editprofile',
-                element: <PrivateRoute>
-                    <EditProfile></EditProfile>
-                </PrivateRoute>,
-            },
-   {
-  path: "/details/:id",
-  element: <DetailsPage />,
-  loader: async ({ params }) => {
-    const res = await axios.get(`https://study-mates-projects.vercel.app/partners/${params.id}`);
-    return res.data;
-  },
-},
-{
-    path:'/my-connections',
-    element: 
-        <MyConnections/>
-   
-},
 
             // {
             //     path: '/service/:id',
@@ -96,6 +79,34 @@ const router = createBrowserRouter([
     {
         path: "/*",
         element: <ErrorPage></ErrorPage>,
+    },
+    {
+        path: "dashboard",
+        element: <DashboradLayout />,
+        children: [
+            {
+                path: 'profile',
+                element: <PrivateRoute>
+                    <Profile />
+                </PrivateRoute>
+            },
+            {
+                path: 'editprofile',
+                element: <PrivateRoute>
+                    <EditProfile></EditProfile>
+                </PrivateRoute>,
+            },
+            {
+                path: "overview",
+                element: <Overview/>
+            },
+            {
+                path: 'my-connections',
+                element:
+                    <MyConnections />
+
+            },
+        ]
     }
 
 ]);
