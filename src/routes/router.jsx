@@ -7,7 +7,6 @@ import PrivateRoute from "../components/PrivateRoute";
 import EditProfile from "../pages/EditProfile";
 import AuthLayout from "../pages/AuthLayout";
 import Register from "../pages/Register";
-// import Forget from "../pages/Forget";
 import ErrorPage from "../pages/ErrorPage";
 import FindPartners from "../pages/FindPartners";
 import DetailsPage from "../pages/DetailsPage";
@@ -15,6 +14,9 @@ import MyConnections from "../pages/MyConnections";
 import axios from "axios";
 import DashboradLayout from "../layouts/DashboradLayout";
 import Overview from "../pages/Overview";
+import About from "../pages/About";
+import Blog from "../pages/Blog";
+import FAQ from "../pages/FAQ";
 
 
 
@@ -44,15 +46,27 @@ const router = createBrowserRouter([
                 },
             },
 
+            {
+                path: "/about",
+                element: <About></About>
+            },
+            {
+                path: "/blog",
+                element: <PrivateRoute>
+                    <Blog></Blog>
+                </PrivateRoute>
+            },
 
-            // {
-            //     path: '/service/:id',
-            //     element: <PrivateRoute>
-            //         {/* <ServiceCard></ServiceCard> */}
-            //         <CardDetails></CardDetails>
-            //     </PrivateRoute>,
-            //     hydrateFallbackElement: <p>Loading...</p>
-            // },
+            {
+                path: "/faq",
+                element: <PrivateRoute>
+                    <FAQ></FAQ>
+                </PrivateRoute>
+            },
+
+
+
+
         ]
     },
 
@@ -69,12 +83,10 @@ const router = createBrowserRouter([
                 path: "/auth/register",
                 element: <Register></Register>,
             },
-            // {
-            //     path: "/auth/resetPass",
-            //     element: <Forget></Forget>,
-            // },
+           
         ]
     },
+
 
     {
         path: "/*",
@@ -98,7 +110,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "overview",
-                element: <Overview/>
+                element: <Overview />
             },
             {
                 path: 'my-connections',

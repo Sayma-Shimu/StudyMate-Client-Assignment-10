@@ -1,56 +1,103 @@
-
 import React from "react";
+import { FaQuoteLeft, FaStar } from "react-icons/fa";
 
 const TestimonialCard = ({ t }) => (
-  <div className="bg-white p-5 rounded-xl shadow-sm border">
-    <div className="flex items-center gap-4 mb-3">
-      <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
+  <div className="min-w-[320px] max-w-[320px] bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 mx-4 flex flex-col group">
+    {/* Quote Icon */}
+    <div className="w-10 h-10 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors duration-300">
+      <FaQuoteLeft className="text-green-600 dark:text-green-400 group-hover:text-white text-sm" />
+    </div>
+
+    {/* Message */}
+    <p className="text-gray-600 dark:text-gray-300 italic leading-relaxed mb-6">
+      “{t.message}”
+    </p>
+
+    <div className="flex-grow"></div>
+
+    {/* User Info */}
+    <div className="flex items-center gap-4 pt-6 border-t border-gray-50 dark:border-gray-800">
+      <div className="relative">
+        <img
+          src={t.avatar}
+          alt={t.name}
+          className="w-12 h-12 rounded-2xl object-cover border-2 border-green-100 dark:border-gray-700"
+        />
+        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full"></div>
+      </div>
       <div>
-        <div className="font-semibold">{t.name}</div>
-        <div className="text-xs text-gray-500">{t.study}</div>
+        <h4 className="font-bold text-gray-900 dark:text-white text-sm">
+          {t.name}
+        </h4>
+        <p className="text-[10px] uppercase tracking-widest font-semibold text-green-600 dark:text-green-400">
+          {t.study}
+        </p>
       </div>
     </div>
-    <p className="text-gray-700 text-sm">“{t.message}”</p>
-    <div className="mt-3 text-yellow-500 font-semibold">{Array.from({length: t.rating}).map((_,i)=>(<span key={i}>★</span>))}</div>
+
+    {/* Rating */}
+    <div className="mt-4 flex gap-1">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <FaStar 
+          key={i} 
+          className={`text-[10px] ${i < t.rating ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`} 
+        />
+      ))}
+    </div>
   </div>
 );
 
 const Testimonials = () => {
   const testimonials = [
-    {
-      name: "Rafi Ahmed",
-      study: "Physics • Intermediate",
-      avatar: "https://i.pravatar.cc/150?img=12",
-      message: "Found a great partner for exam prep — we study twice a week and my grades improved.",
-      rating: 5,
-    },
-    {
-      name: "Maya Islam",
-      study: "English • Beginner",
-      avatar: "https://i.pravatar.cc/150?img=8",
-      message: "Easy to use and I found a supportive study buddy quickly.",
-      rating: 4,
-    },
-    {
-      name: "Tarek Hasan",
-      study: "Math • Advanced",
-      avatar: "https://i.pravatar.cc/150?img=5",
-      message: "The matching and request features worked perfectly — highly recommended.",
-      rating: 5,
-    },
+    { name: "Rafi Ahmed", study: "Physics", avatar: "https://i.pravatar.cc/150?img=12", message: "Found a great partner for exam prep. My grades improved significantly!", rating: 5 },
+    { name: "Maya Islam", study: "English", avatar: "https://i.pravatar.cc/150?img=8", message: "Very easy platform, I found a study buddy in less than 24 hours.", rating: 4 },
+    { name: "Tarek Hasan", study: "Mathematics", avatar: "https://i.pravatar.cc/150?img=5", message: "Perfect matching system. It's much better than studying alone.", rating: 5 },
+    { name: "Nusrat Jahan", study: "Biology", avatar: "https://i.pravatar.cc/150?img=32", message: "The UI is clean and finding partners is super easy and safe.", rating: 5 },
   ];
 
   return (
-    <section className="py-12">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">What Students Say</h2>
+    <section className="py-24 bg-white dark:bg-gray-950 overflow-hidden relative">
+      {/* Decorative Blur Background */}
+      <div className="absolute top-1/2 left-0 w-64 h-64 bg-green-100 dark:bg-green-900/10 rounded-full blur-3xl -translate-y-1/2 -ml-32"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
-          ))}
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h4 className="text-green-600 font-bold uppercase tracking-[0.3em] text-xs mb-3">Success Stories</h4>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">
+            What Students <span className="text-green-600">Say</span>
+          </h2>
+          <div className="w-20 h-1.5 bg-green-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        {/* Continuous Marquee Wrapper */}
+        <div className="relative flex overflow-x-hidden">
+          <div className="flex animate-marquee whitespace-nowrap py-4">
+            {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
+              <TestimonialCard key={i} t={t} />
+            ))}
+          </div>
+          
+          {/* Shadow Fades for professional look */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white dark:from-gray-950 to-transparent"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white dark:from-gray-950 to-transparent"></div>
         </div>
       </div>
+
+      <style>
+        {`
+          .animate-marquee {
+            animation: marquee 40s linear infinite;
+          }
+          .animate-marquee:hover {
+            animation-play-state: paused;
+          }
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.33%); }
+          }
+        `}
+      </style>
     </section>
   );
 };

@@ -19,7 +19,7 @@ const Sidebar = () => {
       path: "/dashboard/my-connections",
       icon: <FaBoxOpen className="text-2xl" />,
     },
-    // Add more user-specific links here
+
   ];
 
   return (
@@ -101,6 +101,11 @@ const Sidebar = () => {
           >
             <FaSignOutAlt className="text-xl" />
             <span>Logout</span>
+          </Link>
+
+          <Link to="/">
+          <button className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all font-semibold"
+          >Back Home</button>
           </Link>
         </div>
       </div>
